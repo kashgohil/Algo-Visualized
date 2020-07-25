@@ -1,0 +1,18 @@
+@import "../../constants/styleConstnats.scss";
+
+.header-container{
+    top:0;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $primary-color;
+    height: 10%;
+    width: 100%;
+    color: $secondary-color;
+    .title{
+        font-weight: 500;
+        font-size: 30px !important;
+        font-family: $ubuntu;
+    }
+}
