@@ -28,7 +28,7 @@ const Header = ({sort,graph}) => {
                             <span className="button" onClick={()=>handleSorting(mergeSort)}>Merge Sort</span>
                             <span className="button" onClick={()=>handleSorting(quickSort)}>Quick Sort</span>
                             <span className="button" onClick={()=>handleSorting(heapSort)}>Heap Sort</span>
-                            <span className="button" onClick={()=>handleSorting(shellSort)}>Shell Sort</span>
+                            {/* <span className="button" onClick={()=>handleSorting(shellSort)}>Shell Sort</span> */}
                         </div>
                     </>
                 :
