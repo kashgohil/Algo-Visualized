@@ -1,0 +1,49 @@
+@import "../../constants/styleConstnats.scss";
+
+.flex-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sorting-page-container{
+    height: 100vh;
+    -moz-user-select: none;
+    user-select: none;
+    transition: all 1s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+
+    .sorting-bar{
+        box-sizing: border-box;
+        margin-top: 8%;
+        height: 80vh;
+        width: 90vw;
+        align-items: flex-end;
+        .bar{
+            width: 1%;
+            border: 1px solid $secondary-color;
+            border-radius: 4px;
+        }
+    }
+    .button{
+        background-color: $secondary-color;
+        color: $primary-color;
+        border: none;
+        padding: 10px;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: all 0.2s cubic-bezier(0.6, 0.04, 0.98, 0.335);
+
+
+        &:focus{
+            outline: none;
+        }
+
+        &:hover{
+            background-color: $primary-color;
+            color: $secondary-color;
+            font-weight: bold;
+
+        }
+    }
+}

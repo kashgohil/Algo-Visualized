@@ -1,0 +1,61 @@
+@import "../../constants/styleConstnats.scss";
+
+.flex-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.graph-page-container{
+    height: 100vh;
+    -moz-user-select: none;
+    user-select: none;
+    transition: all 1s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+
+    .grid-container{
+        box-sizing: border-box;
+        padding: 0;
+        width: 90vw;
+        height: 80vh;
+        align-items: flex-end;
+        border: 1px solid $primary-color;
+        margin: 5% 0 -1px 0;
+        
+        .grid-item{
+            border: 1px solid $primary-color;
+            height: calc(77.5vh/10);
+        }
+
+        .source{
+            background-color: $source-color;
+        }
+        .destination{
+            background-color: $destination-color;
+        }
+        .visited{
+            background-color: rgba(0,0,0,0.2);
+        }
+    }
+    .button{
+        background-color: $secondary-color;
+        color: $primary-color;
+        border: none;
+        padding: 10px;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: all 0.2s cubic-bezier(0.6, 0.04, 0.98, 0.335);
+
+
+        &:focus{
+            outline: none;
+        }
+
+        &:hover{
+            background-color: $primary-color;
+            color: $secondary-color;
+            font-weight: bold;
+
+        }
+    }
+}

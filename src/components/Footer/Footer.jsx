@@ -9,9 +9,9 @@ const Footer = () => {
                 Developed By Kashyap Gohil
             </div>
             <div className="social-links">
-                <FaLinkedin className="social" />
-                <FaGithub className="social" />
-                <FaTwitter className="social" />
+                <a href="https://www.linkedin.com/in/kashyap-gohil-5190a7128/"><FaLinkedin className="social" /></a>
+                <a href="https://github.com/kashgohil"><FaGithub className="social" /></a>
+                <a href="https://twitter.com/kashgohil99"><FaTwitter className="social" /></a>
             </div>
         </div>
     )

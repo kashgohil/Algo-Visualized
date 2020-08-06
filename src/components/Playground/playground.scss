@@ -1,0 +1,14 @@
+.flex-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card{
+    height: 100px;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid black;
+    background-color: red;
+}
