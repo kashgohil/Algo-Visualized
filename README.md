@@ -1,1 +1,1 @@
-##Algo Visualized (https://algo-visualized.netlify.app/)
+## Algo Visualized (https://algo-visualized.netlify.app/)
