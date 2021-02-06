@@ -1,20 +1,22 @@
-import React from 'react'
-import {FaTwitter,FaLinkedin,FaGithub} from 'react-icons/fa'
-import './footer.scss'
+import React from 'react';
+import { LinkedInIcon, GithubIcon } from 'icons';
+import { secondaryColor } from 'constants/styleConstants';
+import './footer.scss';
 
 const Footer = () => {
-    return (
-        <div className="footer-container">
-            <div>
-                Developed By Kashyap Gohil
-            </div>
-            <div className="social-links">
-                <a href="https://www.linkedin.com/in/kashyap-gohil-5190a7128/"><FaLinkedin className="social" /></a>
-                <a href="https://github.com/kashgohil"><FaGithub className="social" /></a>
-                <a href="https://twitter.com/kashgohil99"><FaTwitter className="social" /></a>
-            </div>
-        </div>
-    )
-}
+	return (
+		<footer className='footer-container'>
+			<span className='footer-name'>Developed By Kashyap Gohil</span>
+			<span className='social-links'>
+				<a href='https://www.linkedin.com/in/kashyap-gohil-5190a7128/'>
+					<LinkedInIcon height='30' width='30' color={secondaryColor} />
+				</a>
+				<a href='https://github.com/kashgohil'>
+					<GithubIcon height='30' width='30' color={secondaryColor} />
+				</a>
+			</span>
+		</footer>
+	);
+};
 
-export default Footer
+export default Footer;

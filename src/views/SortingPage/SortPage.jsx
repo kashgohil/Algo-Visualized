@@ -1,67 +1,129 @@
-import React, {useState,useEffect} from 'react'
-import Header from 'components/Header/Header'
-import './sortpage.scss'
+import React, { useState, useEffect } from 'react';
+import { sortingAlgorithms } from 'algorithms/SortingAlgorithms';
+import {
+	primaryColor,
+	sourceColor,
+	destinationColor,
+} from 'constants/styleConstants';
+import './sortpage.scss';
+
+const sortingAlgos = [
+	'Selection',
+	'Insertion',
+	'Bubble',
+	'Merge',
+	'Quick',
+	'Heap',
+];
 
 const SortPage = () => {
+	document.title = 'DS-Algo | Sorting';
 
-    document.title = "Algo Visualized | Sorting"
-    
-    const [randomArray, setRandomArray] = useState([])
-    const [selected,setSelected] = useState({first: null, second: null})
+	const [randomArray, setRandomArray] = useState([]);
+	const [selected, setSelected] = useState({ first: null, second: null });
+	const [process, setProcess] = useState(false);
+	const [current, setCurrent] = useState(0);
 
-    const randomHeightGenerator = () => {
-        return Math.random()+1
-    }
+	const handleSorting = ({ target: { id } }) => {
+		Promise.resolve()
+			.then(() => setProcess(true))
+			.then(() => {
+				console.log('process', process);
+				const ans = sortingAlgorithms[id](randomArray);
+				handleSort(ans);
+			});
+	};
 
-    const randomArrayGenerator = () => {
-        const array = [...Array(100)].map(()=> 100*randomHeightGenerator()-100)
-        setRandomArray(array)
-    }
+	useEffect(() => {
+		console.log('process changed to: ', current);
+	}, []);
 
-    useEffect(() => {
-        const array = [...Array(100)].map(()=> 100*randomHeightGenerator()-100)
-        setRandomArray(array)
-    }, [])
+	const randomArrayGenerator = () => {
+		const array = [...Array(50)].map(() => Math.random() * 100 + 1);
+		setRandomArray(array);
+	};
 
-    const handleSort = (ans) => {
-        for(let i=0;i<ans.length;i++){
-            setTimeout(()=>{
-                setSelected({first:ans[i].first,second:ans[i].second})
-                if(ans[i].action==="swap"){
-                    const tmp = randomArray[ans[i].first]
-                    randomArray[ans[i].first] = randomArray[ans[i].second]
-                    randomArray[ans[i].second] = tmp   
-                }
-                else if(ans[i].action==="replace"){
-                    randomArray[ans[i].first]=ans[i].replace
-                }
-                setTimeout(()=>{setSelected({first:null,second:null})},0)
-            },100)
-        }
-    }
+	useEffect(() => {
+		randomArrayGenerator();
+	}, []);
 
-    return (
-        <>
-            <Header sort={{sort:true,randomArray:randomArray,handleSort:handleSort,randomArrayGenerator:randomArrayGenerator}} />
-            <div className="sorting-page-container flex-center">
-                <div className="sorting-bar flex-center">
-                    {randomArray.map((bar,ind)=>{
-                        return (
-                            <div 
-                                className="bar"
-                                key={ind} 
-                                id={ind} 
-                                style={{
-                                    height:`${bar}%`,
-                                    backgroundColor: ind === selected.first ? "red" : ind === selected.second ? "green" : "#4f30b3"
-                                }}
-                            ></div>
-                        )
-                    })}           
-                </div>
-            </div>
-        </>
-    )
-}
+	const handleOperations = async (ans) => {
+		Promise.resolve()
+			.then(() => setCurrent((current) => current + 1))
+			.then(() => {
+				if (ans.action === 'comp')
+					setSelected({ first: ans.first, second: ans.second });
+				if (ans.action === 'swap') {
+					setSelected({ first: ans.first, second: ans.second });
+					[randomArray[ans.first], randomArray[ans.second]] = [
+						randomArray[ans.second],
+						randomArray[ans.first],
+					];
+				} else if (ans.action === 'replace') {
+					setSelected({ first: ans.first, second: ans.second });
+					randomArray[ans.first] = ans.replace;
+				} else if (ans.action === 'end') {
+					setSelected({ first: null, second: null });
+					setProcess(false);
+				}
+			});
+	};
 
-export default SortPage
+	const handleSort = async (ans) => {
+		ans.push({ action: 'end' });
+		for (let i = 0; i < ans.length; i++) {
+			setTimeout(() => {
+				handleOperations(ans[i]);
+			}, i * 10);
+		}
+	};
+
+
+	return (
+		<section className='sorting-page-container flex-center'>
+			<span className='sorting-footer'>
+				<button
+					disabled={process}
+					className={`button reset ${process ? 'not-allowed' : ''}`}
+					onClick={randomArrayGenerator}
+				>
+					Reset
+				</button>
+				{sortingAlgos.map((sort, index) => (
+					<button
+						disabled={process}
+						name={sort}
+						id={index}
+						className={`button ${process ? 'not-allowed' : ''}`}
+						onClick={handleSorting}
+					>
+						{sort} sort
+					</button>
+				))}
+				<button className='button reset'>{process?'Pause':'Play'}</button>
+			</span>
+			<span className='sorting-bar flex-center'>
+				{randomArray.map((bar, ind) => {
+					return (
+						<div
+							className='bar'
+							key={ind}
+							id={ind}
+							style={{
+								height: `${bar}%`,
+								backgroundColor:
+									ind === selected.first
+										? sourceColor
+										: ind === selected.second
+										? destinationColor
+										: primaryColor,
+							}}
+						></div>
+					);
+				})}
+			</span>
+		</section>
+	);
+};
+
+export default SortPage;

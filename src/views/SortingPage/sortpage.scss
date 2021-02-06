@@ -1,22 +1,20 @@
 @import "../../constants/styleConstnats.scss";
 
-.flex-center{
+.sorting-page-container{
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.sorting-page-container{
-    height: 100vh;
+    flex-direction: column;
+    min-height: calc(100vh - 200px);
+    box-sizing: border-box;
     -moz-user-select: none;
     user-select: none;
     transition: all 1s cubic-bezier(0.55, 0.055, 0.675, 0.19);
 
     .sorting-bar{
-        box-sizing: border-box;
-        margin-top: 8%;
-        height: 80vh;
-        width: 90vw;
+        height: calc(100vh - 200px);
+        width: 100%;
         align-items: flex-end;
         .bar{
             width: 1%;
@@ -25,15 +23,15 @@
         }
     }
     .button{
-        background-color: $secondary-color;
         color: $primary-color;
         border: none;
         padding: 10px;
         text-align: center;
         cursor: pointer;
+        font-size: 16px;
         border-radius: 5px;
+        border: 1px solid $primary-color;
         transition: all 0.2s cubic-bezier(0.6, 0.04, 0.98, 0.335);
-
 
         &:focus{
             outline: none;
@@ -42,8 +40,25 @@
         &:hover{
             background-color: $primary-color;
             color: $secondary-color;
-            font-weight: bold;
-
         }
+    }
+
+    .not-allowed{
+        cursor: not-allowed;
+        opacity: 0.8;
+    }
+
+    .reset{
+        background-color: $primary-color;
+        color: $secondary-color;
+    }
+
+    .sorting-footer{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        gap: 10px;
+        width: 100%;
     }
 }
