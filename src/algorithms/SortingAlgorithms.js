@@ -155,9 +155,7 @@ const heapSort = (randomArray) => {
 
 		if (largest !== i) {
 			ans.push({ first: i, second: largest, action: 'swap' });
-			const tmp = copy[i];
-			copy[i] = copy[largest];
-			copy[largest] = tmp;
+			[copy[i],copy[largest]]=[copy[largest],copy[i]];
 			heapify(copy, len, largest, ans);
 		}
 	};
