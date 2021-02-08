@@ -1,8 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import LandingPage from 'views/LandingPage/LandingPage';
-import GraphPage from 'views/GraphPage/GraphPage';
-import SortPage from 'views/SortingPage/SortPage';
 import MenuPage from 'views/MenuPage/MenuPage';
 import Playground from 'components/Playground/Playground';
 import Header from 'components/Header/Header';

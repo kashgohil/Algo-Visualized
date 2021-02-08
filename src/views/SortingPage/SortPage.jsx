@@ -1,42 +1,54 @@
-import React, { useState, useEffect } from 'react';
-import { sortingAlgorithms } from 'algorithms/SortingAlgorithms';
+import React, { useState, useEffect } from "react";
+import { sortingAlgorithms } from "algorithms/SortingAlgorithms";
 import {
 	primaryColor,
 	sourceColor,
 	destinationColor,
-} from 'constants/styleConstants';
-import './sortpage.scss';
+} from "constants/styleConstants";
+import "./sortpage.scss";
 
 const sortingAlgos = [
-	'Selection',
-	'Insertion',
-	'Bubble',
-	'Merge',
-	'Quick',
-	'Heap',
+	"Selection",
+	"Insertion",
+	"Bubble",
+	"Merge",
+	"Quick",
+	"Heap",
 ];
 
 const SortPage = () => {
-	document.title = 'DS-Algo | Sorting';
+	document.title = "DS-Algo | Sorting";
 
 	const [randomArray, setRandomArray] = useState([]);
 	const [selected, setSelected] = useState({ first: null, second: null });
 	const [process, setProcess] = useState(false);
 	const [current, setCurrent] = useState(0);
+	const [steps, setSteps] = useState([]);
+	const [play, setPlay] = useState(false);
+
+	let ans = [];
 
 	const handleSorting = ({ target: { id } }) => {
 		Promise.resolve()
-			.then(() => setProcess(true))
 			.then(() => {
-				console.log('process', process);
-				const ans = sortingAlgorithms[id](randomArray);
-				handleSort(ans);
+				ans = sortingAlgorithms[id](randomArray);
+				ans.push({ action: "end" });
+				setSteps(ans);
+			})
+			.then(() => {
+				setProcess(true);
+				setPlay(true);
+			})
+			.then(() => {
+				setCurrent(0);
 			});
 	};
 
 	useEffect(() => {
-		console.log('process changed to: ', current);
-	}, []);
+		if (current < steps.length && play) {
+			handleOperations(steps[current]);
+		}
+	}, [steps, current, play]);
 
 	const randomArrayGenerator = () => {
 		const array = [...Array(50)].map(() => Math.random() * 100 + 1);
@@ -49,42 +61,37 @@ const SortPage = () => {
 
 	const handleOperations = async (ans) => {
 		Promise.resolve()
-			.then(() => setCurrent((current) => current + 1))
 			.then(() => {
-				if (ans.action === 'comp')
+				if (ans.action === "comp")
 					setSelected({ first: ans.first, second: ans.second });
-				if (ans.action === 'swap') {
+				if (ans.action === "swap") {
 					setSelected({ first: ans.first, second: ans.second });
 					[randomArray[ans.first], randomArray[ans.second]] = [
 						randomArray[ans.second],
 						randomArray[ans.first],
 					];
-				} else if (ans.action === 'replace') {
+				} else if (ans.action === "replace") {
 					setSelected({ first: ans.first, second: ans.second });
 					randomArray[ans.first] = ans.replace;
-				} else if (ans.action === 'end') {
+				} else if (ans.action === "end") {
 					setSelected({ first: null, second: null });
 					setProcess(false);
+					setPlay(false);
 				}
-			});
+			})
+			.then(() => setCurrent((current) => current + 1));
 	};
 
-	const handleSort = async (ans) => {
-		ans.push({ action: 'end' });
-		for (let i = 0; i < ans.length; i++) {
-			setTimeout(() => {
-				handleOperations(ans[i]);
-			}, i * 10);
-		}
+	const togglePlay = () => {
+		setProcess(!play);
 	};
-
 
 	return (
-		<section className='sorting-page-container flex-center'>
-			<span className='sorting-footer'>
+		<section className="sorting-page-container flex-center">
+			<aside className="sidebar">
 				<button
 					disabled={process}
-					className={`button reset ${process ? 'not-allowed' : ''}`}
+					className={`button reset ${process ? "not-allowed" : ""}`}
 					onClick={randomArrayGenerator}
 				>
 					Reset
@@ -94,19 +101,35 @@ const SortPage = () => {
 						disabled={process}
 						name={sort}
 						id={index}
-						className={`button ${process ? 'not-allowed' : ''}`}
+						className={`button ${process ? "not-allowed" : ""}`}
 						onClick={handleSorting}
 					>
 						{sort} sort
 					</button>
 				))}
-				<button className='button reset'>{process?'Pause':'Play'}</button>
+			</aside>
+			<span className='sorting-footer'>
+				<button
+					className="button reset"
+					onClick={() => setCurrent(current - 1)}
+				>
+					Prev
+				</button>
+				<button className="button reset" onClick={togglePlay}>
+					{play ? "Pause" : "Play"}
+				</button>
+				<button
+					className="button reset"
+					onClick={() => setCurrent(current + 1)}
+				>
+					Next
+				</button>
 			</span>
-			<span className='sorting-bar flex-center'>
+			<span className="sorting-bar flex-center">
 				{randomArray.map((bar, ind) => {
 					return (
 						<div
-							className='bar'
+							className="bar"
 							key={ind}
 							id={ind}
 							style={{

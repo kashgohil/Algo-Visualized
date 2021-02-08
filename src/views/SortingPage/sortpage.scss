@@ -10,6 +10,7 @@
     box-sizing: border-box;
     -moz-user-select: none;
     user-select: none;
+    position: relative;
     transition: all 1s cubic-bezier(0.55, 0.055, 0.675, 0.19);
 
     .sorting-bar{
@@ -60,5 +61,16 @@
         padding: 20px;
         gap: 10px;
         width: 100%;
+    }
+
+    .sidebar{
+        position: absolute;
+        left: 10px;
+        top: 0px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
     }
 }
