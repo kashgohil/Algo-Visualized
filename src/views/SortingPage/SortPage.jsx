@@ -5,6 +5,7 @@ import {
 	sourceColor,
 	destinationColor,
 } from "constants/styleConstants";
+import { NextIcon } from "icons";
 import "./sortpage.scss";
 
 const sortingAlgos = [
@@ -26,22 +27,21 @@ const SortPage = () => {
 	const [steps, setSteps] = useState([]);
 	const [play, setPlay] = useState(false);
 	const [next, setNext] = useState(false);
+	const [sortAlgo, setSortAlgo] = useState(null);
 
 	let ans = [];
 
 	const handleSorting = ({ target: { id } }) => {
 		Promise.resolve()
+			.then(() => setSortAlgo(sortingAlgos[id]))
 			.then(() => {
+				ans = [];
 				ans = sortingAlgorithms[id](randomArray);
 				ans.push({ action: "end" });
 				setSteps(ans);
 			})
 			.then(() => {
 				setProcess(true);
-				setPlay(true);
-			})
-			.then(() => {
-				setCurrent(0);
 			});
 	};
 
@@ -103,19 +103,36 @@ const SortPage = () => {
 					Reset
 				</button>
 				{sortingAlgos.map((sort, index) => (
-					<button
-						disabled={process}
-						name={sort}
-						id={index}
-						className={`button ${process ? "not-allowed" : ""}`}
-						onClick={handleSorting}
-					>
-						{sort} sort
-					</button>
+					<span style={{ position: "relative" }}>
+						<button
+							disabled={process}
+							name={sort}
+							id={index}
+							className={`button ${
+								sortAlgo === sort ? "reset" : ""
+							} ${process ? "not-allowed" : ""}`}
+							onClick={handleSorting}
+						>
+							{sort} sort
+						</button>
+						{sortAlgo === sort && (
+							<span className="below-position">
+								<button
+									className={`play-pause-button ${
+										play ? "paused" : "play"
+									}`}
+									onClick={togglePlay}
+								></button>
+								<NextIcon
+									color={primaryColor}
+									width="20px"
+									height="20px"
+									onClick={() => setNext(true)}
+								/>
+							</span>
+						)}
+					</span>
 				))}
-				<button className="button reset" onClick={togglePlay}>
-					{play ? "Pause" : "Play"}
-				</button>
 				<button className="button reset" onClick={() => setNext(true)}>
 					Next
 				</button>
