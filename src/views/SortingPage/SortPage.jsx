@@ -28,6 +28,7 @@ const SortPage = () => {
 	const [play, setPlay] = useState(false);
 	const [next, setNext] = useState(false);
 	const [sortAlgo, setSortAlgo] = useState(null);
+	const [range,setRange] = useState(50);
 
 	let ans = [];
 
@@ -35,7 +36,6 @@ const SortPage = () => {
 		Promise.resolve()
 			.then(() => setSortAlgo(sortingAlgos[id]))
 			.then(() => {
-				ans = [];
 				ans = sortingAlgorithms[id](randomArray);
 				ans.push({ action: "end" });
 				setSteps(ans);
@@ -53,14 +53,14 @@ const SortPage = () => {
 			handleOperations(steps[current]);
 	}, [steps, current, play, process, next]);
 
+	useEffect(()=>{
+		randomArrayGenerator();
+	},[range])
+
 	const randomArrayGenerator = () => {
-		const array = [...Array(100)].map(() => Math.random() * 100 + 1);
+		const array = [...Array(range)].map(() => Math.random() * 100 + 1);
 		setRandomArray(array);
 	};
-
-	useEffect(() => {
-		randomArrayGenerator();
-	}, []);
 
 	const handleOperations = async (ans) => {
 		Promise.resolve()
@@ -81,6 +81,8 @@ const SortPage = () => {
 					setProcess(false);
 					setPlay(false);
 					setSteps([]);
+					setSortAlgo('');
+					setCurrent(-1)
 					ans = [];
 				}
 				if (next) setNext(false);
@@ -133,9 +135,7 @@ const SortPage = () => {
 						)}
 					</span>
 				))}
-				<button className="button reset" onClick={() => setNext(true)}>
-					Next
-				</button>
+				<input type='range' disabled={process} value={range} min='10' max='100' className='range-slider' onChange={e=>setRange(Number(e.target.value))} style={{color:primaryColor}} />
 			</span>
 			<span className="sorting-bar flex-center">
 				{randomArray.map((bar, ind) => {
