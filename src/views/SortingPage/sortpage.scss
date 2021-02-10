@@ -1,49 +1,110 @@
 @import "../../constants/styleConstnats.scss";
 
-.flex-center{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.sorting-page-container {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	min-height: calc(100vh - 200px);
+	box-sizing: border-box;
+	-moz-user-select: none;
+	user-select: none;
+	position: relative;
+	transition: all 1s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+
+	.sorting-bar {
+		height: calc(100vh - 200px);
+		width: 100%;
+		align-items: flex-end;
+		background-color: rgba(255, 255, 255, 0.2);
+		backdrop-filter: blur(3px);
+		.bar {
+			width: 1%;
+			border: 1px solid $secondary-color;
+			border-radius: 4px;
+		}
+	}
+	.button {
+		color: $primary-color;
+		border: none;
+		padding: 10px;
+		text-align: center;
+		cursor: pointer;
+		font-size: 16px;
+		background-color: transparent;
+		border-radius: 5px;
+		border: 1px solid $primary-color;
+		transition: all 0.2s cubic-bezier(0.6, 0.04, 0.98, 0.335);
+
+		&:focus {
+			outline: none;
+		}
+
+		&:hover {
+			background-color: $primary-color;
+			color: $secondary-color;
+		}
+	}
+
+	.not-allowed {
+		cursor: not-allowed;
+		opacity: 0.8;
+	}
+
+	.reset {
+		background-color: $primary-color;
+		color: $secondary-color;
+	}
+
+	.sorting-footer {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 20px;
+		gap: 10px;
+		width: calc(100% - 40px);
+		background-color: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(3px);
+
+	}
 }
 
-.sorting-page-container{
-    height: 100vh;
-    -moz-user-select: none;
-    user-select: none;
-    transition: all 1s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+//play-pause button
+.below-position {
+	width: 100%;
+	top: -30px;
+	display: flex;
+	position: absolute;
+	align-items: center;
+	justify-content: center;
+	gap: 0px;
+}
+.play-pause-button {
+	border: 0;
+	background: transparent;
+	box-sizing: border-box;
+	width: 0;
+	height: 19px;
 
-    .sorting-bar{
-        box-sizing: border-box;
-        margin-top: 8%;
-        height: 80vh;
-        width: 90vw;
-        align-items: flex-end;
-        .bar{
-            width: 1%;
-            border: 1px solid $secondary-color;
-            border-radius: 4px;
-        }
-    }
-    .button{
-        background-color: $secondary-color;
-        color: $primary-color;
-        border: none;
-        padding: 10px;
-        text-align: center;
-        cursor: pointer;
-        border-radius: 5px;
-        transition: all 0.2s cubic-bezier(0.6, 0.04, 0.98, 0.335);
+	border-color: transparent transparent transparent $primary-color;
+	transition: 100ms all ease;
+	cursor: pointer;
 
+	// play state
+	border-style: solid;
+	border-width: 10px 0 10px 15px;
 
-        &:focus{
-            outline: none;
-        }
+	&.paused {
+		border-style: double;
+		border-width: 0px 0 0px 15px;
+	}
 
-        &:hover{
-            background-color: $primary-color;
-            color: $secondary-color;
-            font-weight: bold;
+	&:focus {
+		outline: none;
+	}
 
-        }
-    }
+	&:hover {
+		border-color: transparent transparent transparent $primary-color;
+	}
 }
