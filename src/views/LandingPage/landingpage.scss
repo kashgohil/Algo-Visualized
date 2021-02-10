@@ -1,96 +1,46 @@
-@import "../../constants/styleConstnats.scss";
+@import '../../constants/styleConstnats.scss';
 
-//general classes
-
-.flex-center{
-  display: flex;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
+.content-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: $ubuntu;
+  height: calc(100vh - 200px);
+	.intro {
+		flex-direction: column;
+		.title {
+			font-weight: 700;
+			font-size: 40px;
+			color: $primary-color;
+		}
+		.subtitle {
+			margin-top: 10px;
+			font-size: 20px;
+			width: 100%;
+			padding: 10px;
+			background-color: $primary-color;
+			color: $secondary-color;
+		}
+		.button {
+			margin: 10px;
+			padding: 10px;
+			background-color: $secondary-color;
+			color: $primary-color;
+			border: none;
+			font-family: $ubuntu;
+			font-weight: 500;
+			cursor: pointer;
+			border: 2px solid $primary-color;
+			border-radius: 5px;
+			transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+			&:hover {
+				background-color: $primary-color;
+				color: $secondary-color;
+			}
+		}
+	}
 }
-
-//main styling
-
-.landing-page-container{
-    height: calc(100vh);
-    -moz-user-select: none;
-    user-select: none;
-
-    .content-container{
-      font-family: $ubuntu;
-      
-      .intro{
-        flex-direction: column;
-        .title{
-          font-weight: 700;
-          font-size: 40px;
-          color: $primary-color;
-        }
-        .subtitle{
-          margin-top: 10px;
-          font-size: 20px;
-          width: 100%;
-          padding:10px;
-          background-color: $primary-color;
-          color: $secondary-color;
-        }
-        .button{
-          margin: 10px;
-          padding: 10px;
-          background-color: $secondary-color;
-          color: $primary-color;
-          border: none;
-          font-family: $ubuntu;
-          font-weight: 500;
-          cursor: pointer;
-          border: 2px solid $primary-color;
-          border-radius: 5px;
-          transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-          &:hover{
-              background-color: $primary-color;
-              color: $secondary-color;
-          }
-        }
-      }
-
-      .algo{
-        flex-direction: row;
-        .card{
-          width: 30vw;
-          height: 30vh;
-          margin: 20px;
-          border-radius: 5px;
-          border: 2px solid $primary-color;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          text-decoration: none;
-          transition: background-color,transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
-          font-size: 30px;
-          background-color: $secondary-color;
-          color: $primary-color;
-          &:hover{
-            transform: scale(1.02);
-            color: $secondary-color;
-            background-color: $primary-color; 
-          }
-        }
-      }
-    }
-}
-
 
 ::-webkit-scrollbar {
-  width: 5px;
-}
-::-webkit-scrollbar-track {
-  background: $secondary-color;
-}
-::-webkit-scrollbar-thumb {
-  background: $primary-color;
-  border-radius: 2px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: $primary-color;
+	display: none;
 }

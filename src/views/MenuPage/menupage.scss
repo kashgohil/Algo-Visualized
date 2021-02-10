@@ -1,0 +1,30 @@
+@import '../../constants/styleConstnats.scss';
+
+.algo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+    height: calc(100vh - 200px);
+    gap: 20px;
+	.card {
+		width: 30vw;
+		height: 30vh;
+		border-radius: 5px;
+		border: 2px solid $primary-color;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		text-decoration: none;
+		transition: background-color,
+			transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+		font-size: 30px;
+		background-color: $secondary-color;
+		color: $primary-color;
+		&:hover {
+			transform: scale(1.05);
+			color: $secondary-color;
+			background-color: $primary-color;
+		}
+	}
+}
