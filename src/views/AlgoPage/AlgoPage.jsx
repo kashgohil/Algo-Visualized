@@ -7,6 +7,9 @@ import './algopage.scss';
 const algorithms = ['Sorting', 'Binary Search', 'Graph', 'DP', 'Greedy'];
 
 const AlgoPage = (props) => {
+
+	document.title = 'DS-Algo | Algorithms';
+
 	switch (props.match.params.type) {
 		case 'Sorting':
 			return <SortPage />;

@@ -1,87 +1,76 @@
-import React,{useState, useEffect} from 'react'
-import Header from 'components/Header/Header'
-import './graphpage.scss'
+import React, { useState, useEffect } from "react";
+import { generateMaze } from "algorithms";
+import "./graphpage.scss";
 
 const GraphPage = () => {
-    
-    const [grid,setGrid] = useState([])
-    const [selected,setSelected] = useState({x:null,y:null})
-    const [node,setNode] = useState(null)
+	document.title = "DS-Algo | Graph";
 
-    const randomGenerator = () => {
-        return Math.floor(Math.random()*100)
-    }
+	const [grid, setGrid] = useState([]);
+	const [selected, setSelected] = useState({ x: null, y: null });
+	const [node, setNode] = useState(null);
 
-    const setRandomNodes = () => {
-        let tmp={}
-        if(node)
-            grid[node.destination.x][node.destination.y]=undefined
-        do{
-            tmp = {
-                source:{
-                    x: randomGenerator()%10,
-                    y: randomGenerator()%10
-                },
-                destination:{
-                    x: randomGenerator()%10,
-                    y: randomGenerator()%10
-                }
-            }
-        }while(tmp.source.x===tmp.destination.x && tmp.source.y===tmp.destination.y)
-        setNode(tmp)
-        setGrid([...Array(10)].map(()=>[...Array(10)]))
-        setSelected({x:null,y:null})
-    }
-    
-    const handleGraph = (ans) => {
-        console.log("inside the handleGraph function")
-        for(let i=0;i<ans.length;i++){
-            setTimeout(()=>{
-                setSelected({x:ans[i].x,y:ans[i].y})
-                grid[ans[i].x][ans[i].y]='v'
-            },100)
-        }
-    }
+	const randomGenerator = () => {
+		return Math.floor(Math.random() * 100);
+	};
 
-    useEffect(() => {
-        setRandomNodes()
-    }, [])
+	const generateRandomMaze = () => {
+		const dp = generateMaze();
+		setGrid(dp);
+	};
 
+	const setRandomNodes = () => {
+		let tmp = {};
+		if (node) grid[node.destination.x][node.destination.y] = undefined;
+		do {
+			tmp = {
+				source: {
+					x: randomGenerator() % 10,
+					y: randomGenerator() % 10,
+				},
+				destination: {
+					x: randomGenerator() % 10,
+					y: randomGenerator() % 10,
+				},
+			};
+		} while (
+			tmp.source.x === tmp.destination.x &&
+			tmp.source.y === tmp.destination.y
+		);
+		setNode(tmp);
+		setGrid([...Array(10)].map(() => [...Array(10)]));
+		setSelected({ x: null, y: null });
+	};
 
-    return (
-        <div>
-            <Header graph={{graph:true,handleGraphAlgo: handleGraph,setRandomNodes:setRandomNodes,node:node}} />
-            <div className="graph-page-container flex-center">
-                <div className="grid-container flex-center">
-                        {grid!==[] &&
-                            grid.map((row,ind1)=>{
-                                return (
-                                    <div key={ind1} style={{width:"100%"}}>
-                                        {row.map((item,ind2)=>
-                                            <div 
-                                                key={`${ind1}${ind2}`} 
-                                                className={
-                                                    `grid-item 
-                                                    ${node.source.x===ind1 && node.source.y===ind2 
-                                                        ? "source" 
-                                                        : node.destination.x===ind1 && node.destination.y===ind2 
-                                                            ? "destination" 
-                                                            : (selected.x===ind1 && selected.y===ind2) || grid[ind1][ind2]==='v'
-                                                                ?"visited"
-                                                                :""
-                                                    }`
-                                                }
-                                            ></div>
-                                        )}
-                                        
-                                    </div>
-                                )
-                            })
-                        }
-                </div>
-            </div>            
-        </div>
-    )
-}
+	const handleGraph = (ans) => {
+		console.log("inside the handleGraph function");
+		for (let i = 0; i < ans.length; i++) {
+			setTimeout(() => {
+				setSelected({ x: ans[i].x, y: ans[i].y });
+				grid[ans[i].x][ans[i].y] = "v";
+			}, 100);
+		}
+	};
 
-export default GraphPage
+	useEffect(() => {
+		generateRandomMaze();
+	}, []);
+
+	return (
+		<section className="graph-page-container flex-center">
+			<section className="grid-footer">
+				<button className="button reset" onClick={generateRandomMaze}>reset</button>
+			</section>
+			<section className="grid-container">
+				{grid.map((box) =>
+					box.map((item) => (
+						<span
+							className={`grid-item ${item ? "reset" : ""}`}
+						></span>
+					))
+				)}
+			</section>
+		</section>
+	);
+};
+
+export default GraphPage;

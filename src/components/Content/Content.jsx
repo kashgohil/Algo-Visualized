@@ -7,7 +7,7 @@ const Content = ({ children }) => {
 			{children}
 			<ParticlesBg
 				type='cobweb'
-				num={window.innerWidth / 10}
+				num={window.innerWidth / 5}
 				background
 				color='#4f30b3'
 				bg={true}

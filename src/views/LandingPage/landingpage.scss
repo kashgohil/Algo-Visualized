@@ -1,11 +1,11 @@
-@import '../../constants/styleConstnats.scss';
+@import "../../constants/styleConstnats.scss";
 
 .content-container {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	font-family: $ubuntu;
-  height: calc(100vh - 200px);
+	height: calc(100vh - 200px);
 	.intro {
 		flex-direction: column;
 		.title {
@@ -24,7 +24,8 @@
 		.button {
 			margin: 10px;
 			padding: 10px;
-			background-color: $secondary-color;
+			background-color: rgba(255, 255, 255, 0.2);
+			backdrop-filter: blur(3px);
 			color: $primary-color;
 			border: none;
 			font-family: $ubuntu;
