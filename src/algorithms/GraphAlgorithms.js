@@ -1,64 +1,120 @@
-const bfs = (node) => {
-    let q = []
-    let ans = []
-    let copy = [...Array(30)].map((row,ind)=>[...Array(30)])
-    q.push(node.source)
+const dfs = (grid, start) => {
+	let st = [];
+	let ans = [];
+	let path = [];
+	let flag = false;
+	let copy = grid.map((arr) =>
+		arr.map((item) => {
+			return { visited: item === "w" ? true : false, parent: null };
+		})
+	);
 
-    while(q.length>0){
-        const tmp = q[0]
-        q.shift()
+	st.push(start);
 
-        copy[tmp.x][tmp.y]='v'
-        ans.push({x:tmp.x,y:tmp.y,action:"visited"})
+	while (st.length > 0) {
+		const current = st.pop();
 
-        if(tmp.x===node.destination.x && tmp.y===node.destination.y)
-            return ans
-        
-        if(tmp.x-1>=0 && copy[tmp.x-1][tmp.y]!=='v'){
-            q.push({x:tmp.x-1,y:tmp.y})
-        }
-        if(tmp.x+1<10 && copy[tmp.x+1][tmp.y]!=='v'){
-            q.push({x:tmp.x+1,y:tmp.y})
-        }
-        if(tmp.y-1>=0 && copy[tmp.x][tmp.y-1]!=='v'){
-            q.push({x:tmp.x,y:tmp.y-1})
-        }
-        if(tmp.y+1<10 && copy[tmp.x][tmp.y+1]!=='v'){
-            q.push({x:tmp.x,y:tmp.y+1})
-        }
-    }
-}
+		if (grid[current.x][current.y] === "t") {
+			ans.push({ ...current, action: "target" });
+			flag = true;
+			break;
+		}
 
-const dfs = (node) => {
-    let st = []
-    let ans = []
-    let copy = [...Array(10)].map((row,ind)=>[...Array(10)])
+		copy[current.x][current.y].visited = true;
+		ans.push({ ...current, action: "visited" });
 
-    st.push(node.source)
+		if (current.x - 1 >= 0 && !copy[current.x - 1][current.y].visited) {
+			st.push({ x: current.x - 1, y: current.y });
+			copy[current.x - 1][current.y].parent = { ...current };
+		}
+		if (current.x + 1 < 25 && !copy[current.x + 1][current.y].visited) {
+			st.push({ x: current.x + 1, y: current.y });
+			copy[current.x + 1][current.y].parent = { ...current };
+		}
+		if (current.y - 1 >= 0 && !copy[current.x][current.y - 1].visited) {
+			st.push({ x: current.x, y: current.y - 1 });
+			copy[current.x][current.y - 1].parent = { ...current };
+		}
+		if (current.y + 1 < 65 && !copy[current.x][current.y + 1].visited) {
+			st.push({ x: current.x, y: current.y + 1 });
+			copy[current.x][current.y + 1].parent = { ...current };
+		}
+	}
 
-    while(st.length>0){
-        let tmp = st[st.length-1]
-        st.pop()
-        
-        copy[tmp.x][tmp.y]='v'
-        ans.push({x:tmp.x,y:tmp.y,action:"visited"})
+	if (flag) {
+		const last = ans[ans.length - 1];
+		let target = copy[last.x][last.y].parent && {
+			...copy[last.x][last.y].parent,
+		};
+		while (target) {
+			path.push({ ...target, action: "path" });
+			target = copy[target.x][target.y].parent && {
+				...copy[target.x][target.y].parent,
+			};
+		}
+		for (let i = path.length - 1; i >= 0; i--) ans.push(path[i]);
+	} else ans.push({ action: "no-path" });
+	ans.push({ action: "end" });
+	return ans;
+};
 
-        if(tmp.x===node.destination.x && tmp.y===node.destination.y)
-            return ans
-        
-        if(tmp.x-1>=0 && copy[tmp.x-1][tmp.y]!=='v'){
-            st.push({x:tmp.x-1,y:tmp.y})
-        }
-        if(tmp.x+1<10 && copy[tmp.x+1][tmp.y]!=='v'){
-            st.push({x:tmp.x+1,y:tmp.y})
-        }
-        if(tmp.y-1>=0 && copy[tmp.x][tmp.y-1]!=='v'){
-            st.push({x:tmp.x,y:tmp.y-1})
-        }
-        if(tmp.y+1<10 && copy[tmp.x][tmp.y+1]!=='v'){
-            st.push({x:tmp.x,y:tmp.y+1})
-        }
-    }
-}
+const bfs = (grid, start) => {
+	let q = [];
+	let ans = [];
+	let path = [];
+	let flag = false;
+	let copy = grid.map((arr) =>
+		arr.map((item) => {
+			return { visited: item === "w" ? true : false, parent: null };
+		})
+	);
 
-export {bfs,dfs}
+	q.push(start);
+
+	while (q.length > 0) {
+		let current = q.shift();
+
+		if (grid[current.x][current.y] === "t") {
+			ans.push({ ...current, action: "target" });
+			flag = true;
+			break;
+		}
+
+		copy[current.x][current.y].visited = true;
+		ans.push({ ...current, action: "visited" });
+
+		if (current.x - 1 >= 0 && !copy[current.x - 1][current.y].visited) {
+			q.push({ x: current.x - 1, y: current.y });
+			copy[current.x - 1][current.y].parent = { ...current };
+		}
+		if (current.x + 1 < 25 && !copy[current.x + 1][current.y].visited) {
+			q.push({ x: current.x + 1, y: current.y });
+			copy[current.x + 1][current.y].parent = { ...current };
+		}
+		if (current.y - 1 >= 0 && !copy[current.x][current.y - 1].visited) {
+			q.push({ x: current.x, y: current.y - 1 });
+			copy[current.x][current.y - 1].parent = { ...current };
+		}
+		if (current.y + 1 < 65 && !copy[current.x][current.y + 1].visited) {
+			q.push({ x: current.x, y: current.y + 1 });
+			copy[current.x][current.y + 1].parent = { ...current };
+		}
+	}
+	if (flag) {
+		const last = ans[ans.length - 1];
+		let target = copy[last.x][last.y].parent && {
+			...copy[last.x][last.y].parent,
+		};
+		while (target) {
+			path.push({ ...target, action: "path" });
+			target = copy[target.x][target.y].parent && {
+				...copy[target.x][target.y].parent,
+			};
+		}
+		for (let i = path.length - 1; i >= 0; i--) ans.push(path[i]);
+	} else ans.push({ action: "no-path" });
+	ans.push({ action: "end" });
+	return ans;
+};
+
+export const graphAlgorithms = [bfs, dfs];
