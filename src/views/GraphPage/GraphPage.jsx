@@ -18,7 +18,7 @@ const initialPoints = {
 	},
 };
 
-const graphAlgos = ["bfs", "dfs"];
+const graphAlgos = ["BFS", "DFS", "A*", "Dijkshtra", "Prim", "Kruskal"];
 
 const GraphPage = () => {
 	document.title = "DS-Algo | Graph";
@@ -153,7 +153,7 @@ const GraphPage = () => {
 			<section className="grid-footer">
 				<button
 					disabled={process}
-					className={`button reset ${process ? 'not-allowed' : ''}`}
+					className={`button reset ${process ? "not-allowed" : ""}`}
 					onClick={generateRandomMaze}
 				>
 					Reset
@@ -183,12 +183,16 @@ const GraphPage = () => {
 				{graphAlgos.map((algo, index) => (
 					<span style={{ position: "relative" }}>
 						<button
-							disabled={process}
+							disabled={process || points.source.x === null}
 							name={algo}
 							id={index}
-							className={`button capitalize ${
+							className={`button ${
 								graphAlgo === algo ? "reset" : ""
-							} ${process ? "not-allowed" : ""}`}
+							} ${
+								process || points.source.x === null
+									? "not-allowed"
+									: ""
+							}`}
 							onClick={handleAlgo}
 						>
 							{algo}
