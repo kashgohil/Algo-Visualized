@@ -1,3 +1,6 @@
+const col=55
+const row=25
+
 const dfs = (grid, start) => {
 	let st = [];
 	let ans = [];
@@ -27,7 +30,7 @@ const dfs = (grid, start) => {
 			st.push({ x: current.x - 1, y: current.y });
 			copy[current.x - 1][current.y].parent = { ...current };
 		}
-		if (current.x + 1 < 25 && !copy[current.x + 1][current.y].visited) {
+		if (current.x + 1 < row && !copy[current.x + 1][current.y].visited) {
 			st.push({ x: current.x + 1, y: current.y });
 			copy[current.x + 1][current.y].parent = { ...current };
 		}
@@ -35,7 +38,7 @@ const dfs = (grid, start) => {
 			st.push({ x: current.x, y: current.y - 1 });
 			copy[current.x][current.y - 1].parent = { ...current };
 		}
-		if (current.y + 1 < 65 && !copy[current.x][current.y + 1].visited) {
+		if (current.y + 1 < col && !copy[current.x][current.y + 1].visited) {
 			st.push({ x: current.x, y: current.y + 1 });
 			copy[current.x][current.y + 1].parent = { ...current };
 		}
@@ -87,7 +90,7 @@ const bfs = (grid, start) => {
 			q.push({ x: current.x - 1, y: current.y });
 			copy[current.x - 1][current.y].parent = { ...current };
 		}
-		if (current.x + 1 < 25 && !copy[current.x + 1][current.y].visited) {
+		if (current.x + 1 < row && !copy[current.x + 1][current.y].visited) {
 			q.push({ x: current.x + 1, y: current.y });
 			copy[current.x + 1][current.y].parent = { ...current };
 		}
@@ -95,7 +98,7 @@ const bfs = (grid, start) => {
 			q.push({ x: current.x, y: current.y - 1 });
 			copy[current.x][current.y - 1].parent = { ...current };
 		}
-		if (current.y + 1 < 65 && !copy[current.x][current.y + 1].visited) {
+		if (current.y + 1 < col && !copy[current.x][current.y + 1].visited) {
 			q.push({ x: current.x, y: current.y + 1 });
 			copy[current.x][current.y + 1].parent = { ...current };
 		}
