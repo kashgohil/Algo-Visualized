@@ -1,16 +1,30 @@
-import React from "react";
-import "./header.scss";
+import React, { useState, useEffect } from 'react';
+import './header.scss';
 
-const Header = ({ graph }) => {
-	const handleGraph = (graphAlgo) => {
-		const ans = graphAlgo(graph.node);
-		graph.handleGraphAlgo(ans);
-	};
+const Header = () => {
+	const [screenWidth, setScreenWidth] = useState(1200);
+
+	useEffect(() => {
+		setScreenWidth(window.innerWidth);
+		window.addEventListener('resize', () => {
+			setScreenWidth(window.innerWidth);
+		});
+	}, []);
+
+	console.clear();
+	console.log(screenWidth);
 
 	return (
-		<header className="header-container">
-			<span className="title">DS-Algo</span>
-		</header>
+		<React.Fragment>
+			<header className='header-container'>
+				<span className='title'>DS-Algo {screenWidth}</span>
+			</header>
+			{screenWidth < 1010 && (
+				<span style={{ background: 'red', width: '100%', padding: '10px' }}>
+					This app will provide best experince in resolutions over 1000.
+				</span>
+			)}
+		</React.Fragment>
 	);
 };
 

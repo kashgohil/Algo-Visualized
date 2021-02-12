@@ -4,8 +4,8 @@ const randomNumber = (mn, mx) => {
 
 export const generateMaze = () => {
 	const row = 25;
-	const col = 65;
-	const dp = [...Array(25)].map(() => [...Array(65)].map(() => "p"));
+	const col = 55;
+	const dp = [...Array(row)].map(() => [...Array(col)].map(() => "p"));
 	for (let i = 0; i < row; i++) {
 		for (let j = 0; j < col; j++) {
 			if (i % 2 === 0 && j % 2 === 0) {
