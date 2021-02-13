@@ -18,7 +18,7 @@ const initialPoints = {
 	},
 };
 
-const graphAlgos = ['BFS', 'DFS', 'A*', 'Dijkshtra', 'Prim', 'Kruskal'];
+const graphAlgos = ['BFS', 'DFS', 'A*', 'Dijkshtra'];
 
 const GraphPage = () => {
 	document.title = 'DS-Algo | Graph';
