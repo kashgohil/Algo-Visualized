@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { generateMaze } from 'algorithms';
-import { graphAlgorithms } from 'algorithms/GraphAlgorithms';
-import { NextIcon } from 'icons';
-import { primaryColor } from 'constants/styleConstants';
-import './graphpage.scss';
+import React, { useState, useEffect } from "react";
+import { generateMaze } from "algorithms";
+import { graphAlgorithms } from "algorithms/GraphAlgorithms";
+import { NextIcon } from "icons";
+import { primaryColor } from "constants/styleConstants";
+import "./graphpage.scss";
 
 const initialPoints = {
 	source: {
@@ -18,15 +18,15 @@ const initialPoints = {
 	},
 };
 
-const graphAlgos = ['BFS', 'DFS', 'A*', 'Dijkshtra'];
+const graphAlgos = ["BFS", "DFS", "A*", "Dijkshtra"];
 
 const GraphPage = () => {
-	document.title = 'DS-Algo | Graph';
+	document.title = "DS-Algo | Graph";
 
 	const [grid, setGrid] = useState([]);
 	const [selected, setSelected] = useState({ x: null, y: null });
 	const [points, setPoints] = useState(initialPoints);
-	const [graphAlgo, setGraphAlgo] = useState('');
+	const [graphAlgo, setGraphAlgo] = useState("");
 	const [current, setCurrent] = useState(0);
 	const [steps, setSteps] = useState([]);
 	const [process, setProcess] = useState(false);
@@ -39,7 +39,7 @@ const GraphPage = () => {
 		setPlay(false);
 		setCurrent(0);
 		setSteps([]);
-		setGraphAlgo('');
+		setGraphAlgo("");
 	};
 
 	const generateRandomMaze = () => {
@@ -74,15 +74,15 @@ const GraphPage = () => {
 		Promise.resolve()
 			.then(() => {
 				setSelected({ x: ans.x, y: ans.y });
-				if (ans.action === 'visited') {
-					grid[ans.x][ans.y] = grid[ans.x][ans.y] === 's' ? 's' : 'v';
-				} else if (ans.action === 'path') {
-					grid[ans.x][ans.y] = 's';
-				} else if (ans.action === 'target') {
-					console.log('Path is found!');
-				} else if (ans.action === 'no-path') {
-					console.log('There is no path!');
-				} else if (ans.action === 'end') {
+				if (ans.action === "visited") {
+					grid[ans.x][ans.y] = grid[ans.x][ans.y] === "s" ? "s" : "v";
+				} else if (ans.action === "path") {
+					grid[ans.x][ans.y] = "s";
+				} else if (ans.action === "target") {
+					console.log("Path is found!");
+				} else if (ans.action === "no-path") {
+					console.log("There is no path!");
+				} else if (ans.action === "end") {
 					resetDetails();
 					setCurrent(-1);
 				}
@@ -105,10 +105,10 @@ const GraphPage = () => {
 
 	const handlePointSetter = (x, y) => {
 		if (points.source.setting) {
-			if (grid[x][y] === 'w') return;
+			if (grid[x][y] === "w") return;
 			if (points.source.x !== null && points.source.y !== null)
-				grid[points.source.x][points.source.y] = 'p';
-			grid[x][y] = 's';
+				grid[points.source.x][points.source.y] = "p";
+			grid[x][y] = "s";
 			setPoints({
 				...points,
 				source: {
@@ -118,9 +118,9 @@ const GraphPage = () => {
 				},
 			});
 		} else if (points.target.setting) {
-			if (grid[x][y] === 'w') return;
+			if (grid[x][y] === "w") return;
 			if (points.target.x !== null && points.target.y !== null)
-				grid[points.target.x][points.target.y] = 'p';
+				grid[points.target.x][points.target.y] = "p";
 			setPoints({
 				...points,
 				target: {
@@ -129,7 +129,7 @@ const GraphPage = () => {
 					setting: false,
 				},
 			});
-			grid[x][y] = 't';
+			grid[x][y] = "t";
 		}
 	};
 
@@ -138,19 +138,21 @@ const GraphPage = () => {
 	}, []);
 
 	return (
-		<section className='graph-page-container flex-center'>
-			<section className='grid-footer'>
+		<section className="page-container">
+			<section className="page-footer">
 				<button
 					disabled={process}
-					className={`button reset ${process ? 'not-allowed' : ''}`}
+					className={`button reset ${process ? "not-allowed" : ""}`}
 					onClick={generateRandomMaze}
 				>
 					Reset
 				</button>
 				<button
 					disabled={process}
-					className={`button ${process ? 'not-allowed' : ''} ${
-						points.source.x !== null || points.source.setting ? 'reset' : ''
+					className={`button ${process ? "not-allowed" : ""} ${
+						points.source.x !== null || points.source.setting
+							? "reset"
+							: ""
 					}`}
 					onClick={toggleSource}
 				>
@@ -158,36 +160,50 @@ const GraphPage = () => {
 				</button>
 				<button
 					disabled={process}
-					className={`button ${process ? 'not-allowed' : ''} ${
-						points.target.x !== null || points.target.setting ? 'reset' : ''
+					className={`button ${process ? "not-allowed" : ""} ${
+						points.target.x !== null || points.target.setting
+							? "reset"
+							: ""
 					}`}
 					onClick={toggleTarget}
 				>
 					Target
 				</button>
 				{graphAlgos.map((algo, index) => (
-					<span style={{ position: 'relative' }}>
+					<span style={{ position: "relative" }}>
 						<button
-							disabled={process || points.source.x === null}
+							disabled={
+								process ||
+								points.source.x === null ||
+								points.target.x === null
+							}
 							name={algo}
 							id={index}
-							className={`button ${graphAlgo === algo ? 'reset' : ''} ${
-								process || points.source.x === null ? 'not-allowed' : ''
+							className={`button ${
+								graphAlgo === algo ? "reset" : ""
+							} ${
+								process ||
+								points.source.x === null ||
+								points.target.x === null
+									? "not-allowed"
+									: ""
 							}`}
 							onClick={handleAlgo}
 						>
 							{algo}
 						</button>
 						{graphAlgo === algo && (
-							<span className='below-position'>
+							<span className="below-position">
 								<button
-									className={`play-pause-button ${play ? 'paused' : 'play'}`}
+									className={`play-pause-button ${
+										play ? "paused" : "play"
+									}`}
 									onClick={togglePlay}
 								></button>
 								<NextIcon
 									color={primaryColor}
-									width='20px'
-									height='20px'
+									width="20px"
+									height="20px"
 									onClick={() => setNext(true)}
 								/>
 							</span>
@@ -195,22 +211,22 @@ const GraphPage = () => {
 					</span>
 				))}
 			</section>
-			<section className='grid-container'>
+			<section className="grid-container">
 				{grid.map((box, x) =>
 					box.map((item, y) => (
 						<span
 							className={`grid-item ${
 								selected.x === x && selected.y === y
-									? 'selected'
-									: item === 'w'
-									? 'reset'
-									: item === 's'
-									? 'source'
-									: item === 't'
-									? 'target'
-									: item === 'v'
-									? 'visited'
-									: ''
+									? "selected"
+									: item === "w"
+									? "reset"
+									: item === "s"
+									? "source"
+									: item === "t"
+									? "target"
+									: item === "v"
+									? "visited"
+									: ""
 							}`}
 							onClick={() => handlePointSetter(x, y)}
 						></span>

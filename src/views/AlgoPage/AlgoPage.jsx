@@ -2,9 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import SortPage from 'views/SortingPage/SortPage';
 import GraphPage from 'views/GraphPage/GraphPage';
-import './algopage.scss';
 
-const algorithms = ['Sorting', 'Binary Search', 'Graph', 'DP', 'Greedy'];
+const algorithms = ['Sorting', 'Search', 'Graph Traversal', 'DP', 'Greedy'];
 
 const AlgoPage = (props) => {
 
@@ -13,16 +12,16 @@ const AlgoPage = (props) => {
 	switch (props.match.params.type) {
 		case 'Sorting':
 			return <SortPage />;
-		case 'Graph':
+		case 'Graph Traversal':
 			return <GraphPage />;
 		default:
 			return (
-				<section className='algopage'>
+				<section className='ds-algo-page'>
 					{algorithms.map((algo, index) => (
 						<Link
 							key={index}
 							style={{ textDecoration: 'none' }}
-							to={`/algo/${algo}`}
+							to={`/algorithms/${algo}`}
 						>
 							<span className='card'>{algo}</span>
 						</Link>

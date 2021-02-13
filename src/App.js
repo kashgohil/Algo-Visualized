@@ -12,17 +12,22 @@ import './App.css';
 
 const App = () => {
 	return (
-		<section className='App'>
+		<section className="App">
 			<Header />
 			<Content>
 				<BrowserRouter>
 					<Switch>
-						<Route exact path='/' component={LandingPage} />
-						<Route exact path='/menu' component={MenuPage} />
-						<Route exact path='/algo' component={AlgoPage} />
-						<Route exact path='/ds' component={DSPage} />
-						<Route exact path='/algo/:type' component={AlgoPage} />
-						<Route exact path='/playground' component={Playground} />
+						<Route exact path="/" component={LandingPage} />
+						<Route exact path="/menu" component={MenuPage} />
+						<Route exact path="/algorithms" component={AlgoPage} />
+						<Route exact path="/datastructures" component={DSPage} />
+						<Route exact path="/algorithms/:type" component={AlgoPage} />
+						<Route exact path="/datastructures/:type" component={DSPage} />
+						<Route
+							exact
+							path="/playground"
+							component={Playground}
+						/>
 					</Switch>
 				</BrowserRouter>
 			</Content>
