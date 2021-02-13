@@ -5,10 +5,10 @@ import './menupage.scss';
 const MenuPage = () => {
 	return (
 		<div className='algo flex-center'>
-			<Link style={{ textDecoration: 'none' }} to='/algo'>
+			<Link style={{ textDecoration: 'none' }} to='/algorithms'>
 				<span className='card'>Algorithms</span>
 			</Link>
-			<Link style={{ textDecoration: 'none' }} to='/ds'>
+			<Link style={{ textDecoration: 'none' }} to='/datastructures'>
 				<span className='card'>Data Structures</span>
 			</Link>
             <ParticlesBg

@@ -1,8 +1,217 @@
 //color constants
 $primary-color: #4f30b3;
 $secondary-color: #ecebe4;
-$source-color: #FC2F007F;
-$target-color: #E0CA3CF7;
+$source-color: #fc2f007f;
+$target-color: #e0ca3cf7;
 
 //font-family
-$ubuntu: 'Ubuntu', sans-serif;
+$ubuntu: "Ubuntu", sans-serif;
+
+//classes
+.flex-center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.ds-algo-page {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(12vw, 12vw));
+	align-items: center;
+	justify-content: center;
+	grid-gap: 10px;
+	min-height: calc(100vh - 200px);
+}
+
+.card {
+	width: 12vw;
+	height: 12vh;
+	border-radius: 5px;
+	border: 2px solid $primary-color;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	text-decoration: none;
+	background-color: rgba(255, 255, 255, 0.2);
+	backdrop-filter: blur(3px);
+	transition: background-color,
+		transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+	font-size: 20px;
+	color: $primary-color;
+	&:hover {
+		transform: scale(1.02);
+		color: $secondary-color;
+		background-color: $primary-color;
+	}
+}
+
+.page-container {
+	min-height: calc(100vh - 200px);
+	-moz-user-select: none;
+	user-select: none;
+	transition: all 1s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+	background-color: rgba(255, 255, 255, 0.2);
+	backdrop-filter: blur(3px);
+	flex-direction: column;
+}
+
+.page-footer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+	gap: 10px;
+	width: calc(100% - 40px);
+	background-color: rgba(255, 255, 255, 0.2);
+	backdrop-filter: blur(3px);
+}
+
+.button {
+	color: $primary-color;
+	border: none;
+	padding: 10px;
+	text-align: center;
+	cursor: pointer;
+	font-size: 16px;
+	background-color: transparent;
+	border-radius: 5px;
+	border: 1px solid $primary-color;
+	transition: all 0.2s cubic-bezier(0.6, 0.04, 0.98, 0.335);
+
+	&:focus {
+		outline: none;
+	}
+
+	&:hover {
+		background-color: $primary-color;
+		color: $secondary-color;
+	}
+}
+
+.not-allowed {
+	cursor: not-allowed;
+	opacity: 0.8;
+}
+
+.reset {
+	background-color: $primary-color;
+	color: $secondary-color;
+}
+
+//play-pause button
+.below-position {
+	width: 100%;
+	top: -30px;
+	display: flex;
+	position: absolute;
+	align-items: center;
+	justify-content: center;
+	gap: 0px;
+}
+.play-pause-button {
+	border: 0;
+	background: transparent;
+	box-sizing: border-box;
+	width: 0;
+	height: 19px;
+
+	border-color: transparent transparent transparent $primary-color;
+	transition: 100ms all ease;
+	cursor: pointer;
+
+	// play state
+	border-style: solid;
+	border-width: 10px 0 10px 15px;
+
+	&.paused {
+		border-style: double;
+		border-width: 0px 0 0px 15px;
+	}
+
+	&:focus {
+		outline: none;
+	}
+
+	&:hover {
+		border-color: transparent transparent transparent $primary-color;
+	}
+}
+
+//message
+.message {
+	visibility: hidden;
+	width: 350px;
+    word-wrap: break-word;
+    height: fit-content;
+	color: $secondary-color;
+	text-align: center;
+	border-radius: 2px;
+	padding: 16px;
+	position: fixed;
+	z-index: 100;
+	right: 10px;
+	top: 100px;
+}
+
+.show {
+	visibility: visible;
+	-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+	from {
+		top: 0;
+		opacity: 0;
+	}
+	to {
+		top: 100px;
+		opacity: 1;
+	}
+}
+
+@keyframes fadein {
+	from {
+		top: 0;
+		opacity: 0;
+	}
+	to {
+		top: 100px;
+		opacity: 1;
+	}
+}
+
+@-webkit-keyframes fadeout {
+	from {
+		top: 100px;
+		opacity: 1;
+	}
+	to {
+		top: 0;
+		opacity: 0;
+	}
+}
+
+@keyframes fadeout {
+	from {
+		top: 100px;
+		opacity: 1;
+	}
+	to {
+		top: 0;
+		opacity: 0;
+	}
+}
+
+.success {
+	background-color: $primary-color;
+}
+
+.warning {
+	background-color: $target-color;
+}
+
+.error {
+	background-color: $source-color;
+}

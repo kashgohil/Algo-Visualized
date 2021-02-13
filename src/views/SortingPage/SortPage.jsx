@@ -6,6 +6,7 @@ import {
 	destinationColor,
 } from "constants/styleConstants";
 import { NextIcon } from "icons";
+import {message} from 'components/message';
 import "./sortpage.scss";
 
 const sortingAlgos = [
@@ -28,7 +29,7 @@ const SortPage = () => {
 	const [play, setPlay] = useState(false);
 	const [next, setNext] = useState(false);
 	const [sortAlgo, setSortAlgo] = useState(null);
-	const [range,setRange] = useState(50);
+	const [range, setRange] = useState(50);
 
 	let ans = [];
 
@@ -53,9 +54,9 @@ const SortPage = () => {
 			handleOperations(steps[current]);
 	}, [steps, current, play, process, next]);
 
-	useEffect(()=>{
+	useEffect(() => {
 		randomArrayGenerator();
-	},[range])
+	}, [range]);
 
 	const randomArrayGenerator = () => {
 		const array = [...Array(range)].map(() => Math.random() * 100 + 1);
@@ -81,9 +82,10 @@ const SortPage = () => {
 					setProcess(false);
 					setPlay(false);
 					setSteps([]);
-					setSortAlgo('');
-					setCurrent(-1)
+					setSortAlgo("");
+					setCurrent(-1);
 					ans = [];
+					message('success', 'Array Sorted!');
 				}
 				if (next) setNext(false);
 			})
@@ -95,8 +97,8 @@ const SortPage = () => {
 	};
 
 	return (
-		<section className="sorting-page-container flex-center">
-			<span className="sorting-footer">
+		<section className="page-container">
+			<span className="page-footer">
 				<button
 					disabled={process}
 					className={`button reset ${process ? "not-allowed" : ""}`}
@@ -135,9 +137,18 @@ const SortPage = () => {
 						)}
 					</span>
 				))}
-				<input type='range' disabled={process} value={range} min='10' max='100' className='range-slider' onChange={e=>setRange(Number(e.target.value))} style={{color:primaryColor}} />
+				<input
+					type="range"
+					disabled={process}
+					value={range}
+					min="10"
+					max="100"
+					className="range-slider"
+					onChange={(e) => setRange(Number(e.target.value))}
+					style={{ color: primaryColor }}
+				/>
 			</span>
-			<span className="sorting-bar flex-center">
+			<span className="sorting-bar">
 				{randomArray.map((bar, ind) => {
 					return (
 						<div
