@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ArrayPage from "views/ArrayPage/ArrayPage";
 
-const datastructures = ["Array", "Linked List", "Stack", "Queue", "Trees"];
+const datastructures = ["Array", "Linked List", "Stack", "Queue", "Binary Tree"];
 
 const DSPage = (props) => {
 	document.title = "DS-Algo | Data Structures";
@@ -19,7 +19,7 @@ const DSPage = (props) => {
 						<Link
 							key={index}
 							style={{ textDecoration: "none" }}
-							to={`/ds/${data}`}
+							to={`/datastructures/${data}`}
 						>
 							<span className="card">{data}</span>
 						</Link>
