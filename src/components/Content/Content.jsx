@@ -3,7 +3,7 @@ import ParticlesBg from 'particles-bg';
 
 const Content = ({ children }) => {
 	return (
-		<section style={{ minHeight: 'calc(100vh - 200px)', padding:'20px',boxSizing:'border-box', marginTop: '80px' }}>
+		<section style={{ minHeight: 'calc(100vh - 200px)', height:'100%', padding:'20px',boxSizing:'border-box', marginTop: '80px' }}>
 			{children}
 			<ParticlesBg
 				type='cobweb'

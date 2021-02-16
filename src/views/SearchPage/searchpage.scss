@@ -1,0 +1,46 @@
+@import "../../constants/styleConstnats.scss";
+
+.target-input{
+    color: $secondary-color;
+    font-size: 16px;
+    padding: 10px 10px;
+    width: 5ch;
+	background-color: $primary-color;
+    border: 1px solid $primary-color;
+    border-radius: 5px;
+    text-align: center;
+
+    &::placeholder{
+        color: $secondary-color;
+        text-align: center;
+    }
+
+    &:focus{
+        outline: none;
+    }
+}
+
+.search-bar {
+	height: calc(100vh - 200px);
+	width: 100%;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+
+    .bar-container{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: flex-end;
+        font-size: 12px;
+        height: 100%;
+        color: $primary-color;
+
+        .bar {
+            width: 14px;
+            border: 1px solid $secondary-color;
+            border-radius: 4px;
+        }
+    }
+
+}
