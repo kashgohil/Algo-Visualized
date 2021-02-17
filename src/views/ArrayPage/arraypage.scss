@@ -1,1 +1,58 @@
-@import '../../constants/styleConstnats.scss';
+@import "../../constants/styleConstnats.scss";
+
+.array-container {
+	height: calc(100vh - 200px);
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.no-element {
+		color: $primary-color;
+		font-size: 30px;
+		font-weight: bolder;
+	}
+
+	.array {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: row;
+
+		.box {
+			background-color: $primary-color;
+			color: $secondary-color;
+			width: 8vh;
+			height: 8vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 24px;
+			text-align: center;
+			border: 1px solid $secondary-color;
+			cursor: pointer;
+		}
+
+		.select {
+			color: red;
+			background-color: $source-color;
+		}
+	}
+
+	.details {
+		padding: 20px 0 0;
+		font-size: 18px;
+		color: $primary-color;
+		text-align: left;
+
+		.title {
+			font-size: 18px;
+			font-weight: bolder;
+			text-align: left;
+		}
+
+		li {
+			padding: 5px 0px;
+		}
+	}
+}
