@@ -89,6 +89,13 @@ $ubuntu: "Ubuntu", sans-serif;
 	}
 }
 
+.right-aligned{
+	position: fixed;
+	right: 20px;
+	top: 20px;
+	margin-bottom: 20px;
+}
+
 .not-allowed {
 	cursor: not-allowed;
 	opacity: 0.8;

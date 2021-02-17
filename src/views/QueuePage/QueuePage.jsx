@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import './arraypage.scss';
+import './queuepage.scss';
 
 const Details = () => {
 	return (
 		<span className='details'>
 			<ul>
-				<li>Contiguous memory to store data</li>
-				<li>0 - based indexing</li>
-				<li>Cannot change the size once defined</li>
-				<li>Multi dimensional array</li>
+				<li>First In First Out - FIFO</li>
+				<li>Enqueue and Dequeue operations</li>
+				<li>Enqueue operation - Appends element on the queue</li>
+				<li>Dequeue operation - removes the oldest element from the queue</li>
 				<li>
 					Vectors are dynamic arrays where elements can be appended and deleted,
 					It will change the size of the array
@@ -16,9 +16,11 @@ const Details = () => {
 				<li>
 					Time Complexity
 					<ul>
-						<li>Access: O(1)</li>
+                        <li>Enqueue: O(1)</li>
+                        <li>Dequeue: O(1)</li>
+						<li>Peek: O(1)</li>
 						<li>Search: O(n)</li>
-						<li>Update: O(1)</li>
+						<li>Update: O(n)</li>
 					</ul>
 				</li>
 				<li>Space Complexity: O(n)</li>
@@ -27,18 +29,18 @@ const Details = () => {
 	);
 };
 
-const ArrayPage = () => {
-	document.title = 'DS-Algo | Array';
+const QueuePage = () => {
+	document.title = 'DS-Algo | queue';
 
-	const [array, setArray] = useState([70, 74, 23, 64, 23]);
+	const [queue, setQueue] = useState([70, 74, 23, 64, 23]);
 	const [addValue, setAddValue] = useState('');
 	const [select, setSelect] = useState(null);
 	const [toggle, setToggle] = useState(false);
 
-	const Array = () => {
-		return array.length > 0 ? (
-			<span className='array'>
-				{array.map((item, index) => (
+	const Queue = () => {
+		return queue.length > 0 ? (
+			<span className='queue'>
+				{queue.map((item, index) => (
 					<span
 						key={index}
 						className={`box ${select === index && 'select'}`}
@@ -54,13 +56,13 @@ const ArrayPage = () => {
 	};
 
 	const handleAppend = () => {
-		setArray([...array, addValue]);
+		setQueue([...queue, addValue]);
 		setAddValue('');
 	};
 
 	const handleRemove = () => {
-		const tmp = array.filter((item, index) => index !== select);
-		setArray(tmp);
+		const tmp = queue.filter((item, index) => index !== select);
+		setQueue(tmp);
 		setSelect(null);
 	};
 
@@ -81,12 +83,12 @@ const ArrayPage = () => {
 						/>
 						<button
 							className={`button ${
-								(addValue === '' || array.length === 10) && 'not-allowed'
+								(addValue === '' || queue.length === 10) && 'not-allowed'
 							}`}
 							onClick={handleAppend}
-							disabled={addValue === '' || array.length === 10}
+							disabled={addValue === '' || queue.length === 10}
 						>
-							{array.length > 0 ? 'Append' : 'Add'}
+							{queue.length > 0 ? 'Append' : 'Add'}
 						</button>
 						<button
 							className={`button ${select === null && 'not-allowed'}`}
@@ -97,7 +99,7 @@ const ArrayPage = () => {
 						</button>
 					</>
 				) : (
-					<span className='title padding-10'>Array</span>
+					<span className='title padding-10'>Queue</span>
 				)}
 				<button
 					className='button reset right-aligned'
@@ -106,11 +108,11 @@ const ArrayPage = () => {
 					{toggle ? 'Details' : 'Demo'}
 				</button>
 			</section>
-			<section className='array-container'>
-				{toggle ? <Array /> : <Details />}
+			<section className='queue-container'>
+				{toggle ? <Queue /> : <Details />}
 			</section>
 		</section>
 	);
 };
 
-export default ArrayPage;
+export default QueuePage;

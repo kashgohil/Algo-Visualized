@@ -1,24 +1,33 @@
 import React, { useState } from 'react';
-import './arraypage.scss';
+import './linkedlistpage.scss';
 
 const Details = () => {
 	return (
 		<span className='details'>
 			<ul>
-				<li>Contiguous memory to store data</li>
-				<li>0 - based indexing</li>
-				<li>Cannot change the size once defined</li>
-				<li>Multi dimensional array</li>
-				<li>
-					Vectors are dynamic arrays where elements can be appended and deleted,
-					It will change the size of the array
-				</li>
+				<li>Segmented memory to store data</li>
+				<li>Singly Linked List</li>
+				<ul>
+					<li>
+						Singly Linked List has one pointer pointing to the next element
+					</li>
+                    <li>Singly Linked List is</li>
+				</ul>
+                <li>Doubly Linked List</li>
+				<ul>
+					<li>
+						Doubly Linked List has two pointers, one pointing to the next
+						element, one pointing to the previous element
+					</li>
+				</ul>
 				<li>
 					Time Complexity
 					<ul>
-						<li>Access: O(1)</li>
+						<li>Insertion: O(n)</li>
+						<li>Deletion: O(n)</li>
+						<li>Access: O(n)</li>
 						<li>Search: O(n)</li>
-						<li>Update: O(1)</li>
+						<li>Update: O(n)</li>
 					</ul>
 				</li>
 				<li>Space Complexity: O(n)</li>
@@ -27,18 +36,18 @@ const Details = () => {
 	);
 };
 
-const ArrayPage = () => {
-	document.title = 'DS-Algo | Array';
+const LinkedListPage = () => {
+	document.title = 'DS-Algo | Linked List';
 
-	const [array, setArray] = useState([70, 74, 23, 64, 23]);
+	const [linkedList, setLinkedList] = useState([70, 74, 23, 64, 23]);
 	const [addValue, setAddValue] = useState('');
 	const [select, setSelect] = useState(null);
 	const [toggle, setToggle] = useState(false);
 
-	const Array = () => {
-		return array.length > 0 ? (
-			<span className='array'>
-				{array.map((item, index) => (
+	const LinkedList = () => {
+		return linkedList.length > 0 ? (
+			<span className='linkedList'>
+				{linkedList.map((item, index) => (
 					<span
 						key={index}
 						className={`box ${select === index && 'select'}`}
@@ -54,13 +63,13 @@ const ArrayPage = () => {
 	};
 
 	const handleAppend = () => {
-		setArray([...array, addValue]);
+		setLinkedList([...linkedList, addValue]);
 		setAddValue('');
 	};
 
 	const handleRemove = () => {
-		const tmp = array.filter((item, index) => index !== select);
-		setArray(tmp);
+		const tmp = linkedList.filter((item, index) => index !== select);
+		setLinkedList(tmp);
 		setSelect(null);
 	};
 
@@ -81,12 +90,12 @@ const ArrayPage = () => {
 						/>
 						<button
 							className={`button ${
-								(addValue === '' || array.length === 10) && 'not-allowed'
+								(addValue === '' || linkedList.length === 10) && 'not-allowed'
 							}`}
 							onClick={handleAppend}
-							disabled={addValue === '' || array.length === 10}
+							disabled={addValue === '' || linkedList.length === 10}
 						>
-							{array.length > 0 ? 'Append' : 'Add'}
+							{linkedList.length > 0 ? 'Append' : 'Add'}
 						</button>
 						<button
 							className={`button ${select === null && 'not-allowed'}`}
@@ -97,7 +106,7 @@ const ArrayPage = () => {
 						</button>
 					</>
 				) : (
-					<span className='title padding-10'>Array</span>
+					<span className='title padding-10'>Linked List</span>
 				)}
 				<button
 					className='button reset right-aligned'
@@ -106,11 +115,11 @@ const ArrayPage = () => {
 					{toggle ? 'Details' : 'Demo'}
 				</button>
 			</section>
-			<section className='array-container'>
-				{toggle ? <Array /> : <Details />}
+			<section className='linkedList-container'>
+				{toggle ? <LinkedList /> : <Details />}
 			</section>
 		</section>
 	);
 };
 
-export default ArrayPage;
+export default LinkedListPage;
