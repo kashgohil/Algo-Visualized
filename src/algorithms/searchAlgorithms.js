@@ -26,7 +26,7 @@ const binarySearch = (searchArray, target) => {
 	let start = 0;
 	let end = array.length - 1;
 	while (start <= end) {
-		const mid = Math.floor(start + (end - start) / 2);
+		const mid = Math.floor((end + start) / 2);
 		if (array[mid] === target) {
 			ans.push({ index: mid, action: "found", start, end });
 			return ans;

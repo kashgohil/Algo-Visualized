@@ -1,6 +1,6 @@
 @import '../../constants/styleConstnats.scss';
 
-.array-container {
+.linkedList-container {
 	height: calc(100vh - 200px);
 	width: 100%;
 	display: flex;
@@ -13,7 +13,7 @@
 		font-weight: bolder;
 	}
 
-	.array {
+	.linkedList {
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -60,3 +60,4 @@
 	color: $primary-color;
 	height: 40px;
 }
+

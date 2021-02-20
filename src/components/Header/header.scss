@@ -18,10 +18,11 @@
     color: $secondary-color;
     -moz-user-select: none;
     user-select: none;
-    .title{
+    .header-title{
         font-weight: 500;
         font-size: 30px !important;
         font-family: $ubuntu;
+        height: 40px;
     }
     .button{
         padding: 10px;

@@ -1,4 +1,4 @@
-@import "../../constants/styleConstnats.scss";
+@import '../../constants/styleConstnats.scss';
 
 .algo {
 	display: flex;
@@ -9,19 +9,7 @@
 	.card {
 		width: 30vw;
 		height: 30vh;
-		border-radius: 5px;
-		border: 2px solid $primary-color;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		cursor: pointer;
-		text-decoration: none;
-		transition: background-color,
-			transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
 		font-size: 30px;
-		background-color: rgba(255, 255, 255, 0.2);
-		backdrop-filter: blur(3px);
-		color: $primary-color;
 		&:hover {
 			transform: scale(1.05);
 			color: $secondary-color;
