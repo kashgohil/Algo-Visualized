@@ -5,7 +5,7 @@ $source-color: #fc2f007f;
 $target-color: #e0ca3cf7;
 
 //font-family
-$ubuntu: "Ubuntu", sans-serif;
+$ubuntu: 'Ubuntu', sans-serif;
 
 //classes
 .flex-center {
@@ -16,31 +16,32 @@ $ubuntu: "Ubuntu", sans-serif;
 
 .ds-algo-page {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(12vw, 12vw));
+	grid-template-columns: repeat(auto-fit, minmax(15vw, 15vw));
 	align-items: center;
 	justify-content: center;
-	grid-gap: 10px;
+	grid-gap: 20px;
 	min-height: calc(100vh - 200px);
 }
 
 .card {
-	width: 12vw;
-	height: 12vh;
+	width: 15vw;
+	height: 15vh;
 	border-radius: 5px;
-	border: 2px solid $primary-color;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
 	text-decoration: none;
 	background-color: rgba(255, 255, 255, 0.2);
-	backdrop-filter: blur(3px);
+	backdrop-filter: blur(5px);
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+		rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 	transition: background-color,
 		transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
 	font-size: 20px;
 	color: $primary-color;
 	&:hover {
-		transform: scale(1.02);
+		transform: scale(1.1);
 		color: $secondary-color;
 		background-color: $primary-color;
 	}
@@ -52,8 +53,10 @@ $ubuntu: "Ubuntu", sans-serif;
 	user-select: none;
 	transition: all 1s cubic-bezier(0.55, 0.055, 0.675, 0.19);
 	background-color: rgba(255, 255, 255, 0.2);
-	backdrop-filter: blur(3px);
+	backdrop-filter: blur(5px);
 	flex-direction: column;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+		rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 .page-footer {
@@ -89,7 +92,34 @@ $ubuntu: "Ubuntu", sans-serif;
 	}
 }
 
-.right-aligned{
+.details {
+	padding: 20px 0 0;
+	font-size: 18px;
+	color: $primary-color;
+	text-align: left;
+	overflow-y: scroll;
+	height: 100%;
+
+	li {
+		padding: 5px 0px;
+	}
+
+	.list-title {
+		font-size: 24px;
+		font-weight: bold;
+	}
+
+	.divider {
+		height: 1px;
+		width: 100%;
+		background-color: $primary-color;
+		opacity: 0.4;
+		margin: 10px 0;
+		display: flex;
+	}
+}
+
+.right-aligned {
 	position: fixed;
 	right: 20px;
 	top: 20px;
@@ -149,8 +179,8 @@ $ubuntu: "Ubuntu", sans-serif;
 .message {
 	visibility: hidden;
 	width: 350px;
-    word-wrap: break-word;
-    height: fit-content;
+	word-wrap: break-word;
+	height: fit-content;
 	color: $secondary-color;
 	text-align: center;
 	border-radius: 2px;

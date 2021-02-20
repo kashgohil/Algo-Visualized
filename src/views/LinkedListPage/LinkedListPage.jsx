@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {message} from 'components/message';
 import './linkedlistpage.scss';
 
 const Details = () => {
@@ -11,7 +12,8 @@ const Details = () => {
 					<li>
 						Singly Linked List has one pointer pointing to the next element
 					</li>
-                    <li>Singly Linked List is</li>
+                    <li>Cannot go to the previous element</li>
+					<li>Less storge space required compared to doubly linked list</li>
 				</ul>
                 <li>Doubly Linked List</li>
 				<ul>
@@ -19,6 +21,8 @@ const Details = () => {
 						Doubly Linked List has two pointers, one pointing to the next
 						element, one pointing to the previous element
 					</li>
+					<li>Can go to the previous element</li>
+					<li>More storage space required</li>
 				</ul>
 				<li>
 					Time Complexity
@@ -65,12 +69,14 @@ const LinkedListPage = () => {
 	const handleAppend = () => {
 		setLinkedList([...linkedList, addValue]);
 		setAddValue('');
+		message("success",`Added ${addValue} to the Linked List.`);
 	};
 
 	const handleRemove = () => {
 		const tmp = linkedList.filter((item, index) => index !== select);
 		setLinkedList(tmp);
 		setSelect(null);
+		message("success",`Removed ${addValue} from the Linked List.`);
 	};
 
 	const handleAddValue = (e) => {

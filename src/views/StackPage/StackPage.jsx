@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { message } from 'components/message';
 import './stackpage.scss';
 
 const Details = () => {
@@ -8,16 +9,17 @@ const Details = () => {
 				<li>First In Last Out - FILO</li>
 				<li>Push and pop operations</li>
 				<li>Push operation - appends element on the stack</li>
-				<li>Pop operation - Removes the recetly appended element from the stack</li>
 				<li>
-					Vectors are dynamic arrays where elements can be appended and deleted,
-					It will change the size of the array
+					Pop operation - Removes the recetly appended element from the stack
+				</li>
+				<li>
+					Used in Depth First Search, Palindrome checking, Bracket matching etc
 				</li>
 				<li>
 					Time Complexity
 					<ul>
 						<li>Pop: O(1)</li>
-                        <li>Push: O(1)</li>
+						<li>Push: O(1)</li>
 						<li>Peek: O(1)</li>
 						<li>Search: O(n)</li>
 						<li>Update: O(n)</li>
@@ -34,18 +36,13 @@ const StackPage = () => {
 
 	const [stack, setStack] = useState([70, 74, 23, 64, 23]);
 	const [addValue, setAddValue] = useState('');
-	const [select, setSelect] = useState(null);
 	const [toggle, setToggle] = useState(false);
 
 	const Stack = () => {
 		return stack.length > 0 ? (
 			<span className='stack'>
 				{stack.map((item, index) => (
-					<span
-						key={index}
-						className={`box ${select === index && 'select'}`}
-						onClick={() => setSelect(index)}
-					>
+					<span key={index} className='box'>
 						{item}
 					</span>
 				))}
@@ -58,12 +55,14 @@ const StackPage = () => {
 	const handleAppend = () => {
 		setStack([...stack, addValue]);
 		setAddValue('');
+		message('success', `Pushed ${addValue} in the stack!`);
 	};
 
 	const handleRemove = () => {
-		const tmp = stack.filter((item, index) => index !== select);
+		const tmp = stack.slice();
+		const a = tmp.pop();
 		setStack(tmp);
-		setSelect(null);
+		message('success', `Popped ${a} from the stack`);
 	};
 
 	const handleAddValue = (e) => {
@@ -88,14 +87,14 @@ const StackPage = () => {
 							onClick={handleAppend}
 							disabled={addValue === '' || stack.length === 10}
 						>
-							{stack.length > 0 ? 'Append' : 'Add'}
+							Push
 						</button>
 						<button
-							className={`button ${select === null && 'not-allowed'}`}
-							disabled={select === null}
+							className={`button ${stack.length === 0 && 'not-allowed'}`}
+							disabled={stack.length === 0}
 							onClick={handleRemove}
 						>
-							Remove
+							Pop
 						</button>
 					</>
 				) : (

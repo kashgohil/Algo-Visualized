@@ -8,10 +8,10 @@ const Footer = () => {
 		<footer className='footer-container'>
 			<span className='footer-name'>Developed By Kashyap Gohil</span>
 			<span className='social-links'>
-				<a href='https://www.linkedin.com/in/kashyap-gohil-5190a7128/'>
+				<a href='https://www.linkedin.com/in/kashyap-gohil-5190a7128/' target='__blank'>
 					<LinkedInIcon height='30' width='30' color={secondaryColor} />
 				</a>
-				<a href='https://github.com/kashgohil'>
+				<a href='https://github.com/kashgohil' target='__blank'>
 					<GithubIcon height='30' width='30' color={secondaryColor} />
 				</a>
 			</span>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {message} from 'components/message';
 import './arraypage.scss';
 
 const Details = () => {
@@ -56,12 +57,14 @@ const ArrayPage = () => {
 	const handleAppend = () => {
 		setArray([...array, addValue]);
 		setAddValue('');
+		message("success",`Added ${addValue} to the array.`);
 	};
 
 	const handleRemove = () => {
 		const tmp = array.filter((item, index) => index !== select);
 		setArray(tmp);
 		setSelect(null);
+		message("success",`Removed ${addValue} from the array.`);
 	};
 
 	const handleAddValue = (e) => {

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { message } from 'components/message';
 import './queuepage.scss';
 
 const Details = () => {
@@ -9,15 +10,12 @@ const Details = () => {
 				<li>Enqueue and Dequeue operations</li>
 				<li>Enqueue operation - Appends element on the queue</li>
 				<li>Dequeue operation - removes the oldest element from the queue</li>
-				<li>
-					Vectors are dynamic arrays where elements can be appended and deleted,
-					It will change the size of the array
-				</li>
+				<li>Used in Breadth First Search, Buffers, Sliding Window Problems</li>
 				<li>
 					Time Complexity
 					<ul>
-                        <li>Enqueue: O(1)</li>
-                        <li>Dequeue: O(1)</li>
+						<li>Enqueue: O(1)</li>
+						<li>Dequeue: O(1)</li>
 						<li>Peek: O(1)</li>
 						<li>Search: O(n)</li>
 						<li>Update: O(n)</li>
@@ -30,40 +28,37 @@ const Details = () => {
 };
 
 const QueuePage = () => {
-	document.title = 'DS-Algo | queue';
+	document.title = 'DS-Algo | Queue';
 
 	const [queue, setQueue] = useState([70, 74, 23, 64, 23]);
 	const [addValue, setAddValue] = useState('');
-	const [select, setSelect] = useState(null);
 	const [toggle, setToggle] = useState(false);
 
 	const Queue = () => {
 		return queue.length > 0 ? (
 			<span className='queue'>
 				{queue.map((item, index) => (
-					<span
-						key={index}
-						className={`box ${select === index && 'select'}`}
-						onClick={() => setSelect(index)}
-					>
+					<span key={index} className='box'>
 						{item}
 					</span>
 				))}
 			</span>
 		) : (
-			<span className='no-element'>Add elements</span>
+			<span className='no-element'>Enqueue elements</span>
 		);
 	};
 
-	const handleAppend = () => {
+	const handleEnqueue = () => {
 		setQueue([...queue, addValue]);
 		setAddValue('');
+		message('success', `Enqueued ${addValue} to the Queue.`);
 	};
 
-	const handleRemove = () => {
-		const tmp = queue.filter((item, index) => index !== select);
+	const handleDequeue = () => {
+		const tmp = queue.slice();
+		const a = tmp.shift();
 		setQueue(tmp);
-		setSelect(null);
+		message('success', `Dequeued ${a} from the Queue.`);
 	};
 
 	const handleAddValue = (e) => {
@@ -85,21 +80,21 @@ const QueuePage = () => {
 							className={`button ${
 								(addValue === '' || queue.length === 10) && 'not-allowed'
 							}`}
-							onClick={handleAppend}
+							onClick={handleEnqueue}
 							disabled={addValue === '' || queue.length === 10}
 						>
-							{queue.length > 0 ? 'Append' : 'Add'}
+							Enqueue
 						</button>
 						<button
-							className={`button ${select === null && 'not-allowed'}`}
-							disabled={select === null}
-							onClick={handleRemove}
+							className={`button ${queue.length === 0 && 'not-allowed'}`}
+							disabled={queue.length === 0}
+							onClick={handleDequeue}
 						>
-							Remove
+							Dequeue
 						</button>
 					</>
 				) : (
-					<span className='title padding-10'>Queue</span>
+					<span className='title'>Queue</span>
 				)}
 				<button
 					className='button reset right-aligned'

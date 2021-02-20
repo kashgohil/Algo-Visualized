@@ -4,7 +4,7 @@ import './header.scss';
 const Header = () => {
 	return (
 		<header className='header-container'>
-			<span className='title'>DS-Algo</span>
+			<span className='header-title'>DS-Algo</span>
 		</header>
 	);
 };
