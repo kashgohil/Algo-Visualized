@@ -131,7 +131,7 @@ const Details = () => {
 				</li>
 				<span className='divider'></span>
 				<li>
-					<span clasName='list-title'>Heap Sort</span>
+					<span className='list-title'>Heap Sort</span>
 					<ul>
 						<li>Based on Binary Heap Data Strcutre</li>
 						<li>Max heap or Min heap are used</li>
