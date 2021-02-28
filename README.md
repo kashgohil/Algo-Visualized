@@ -1,4 +1,4 @@
-# Algo Visualized
+# Ds-algo (ds-algo.netlify.app)
 
 ### Learning new algorithms and data structures
 ### Implementing them here, visialising them here
